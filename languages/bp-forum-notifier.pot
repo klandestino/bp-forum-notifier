@@ -1,0 +1,276 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-26 14:43+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/bp-forum-notifier-admin.php:4
+msgid "Delay in minutes before e-mails are sent"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:5
+msgid "E-mail subject when message contains multiple forum activities"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:5
+#, php-format
+msgid "%1$s = blogname, %2$d = number of activities"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:6
+msgid "Reply notification (single reply)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:6
+#: templates/bp-forum-notifier-admin.php:8
+#: templates/bp-forum-notifier-admin.php:16
+#: templates/bp-forum-notifier-admin.php:18
+#, php-format
+msgid "%1$s = blogname, %2$s = author, %3$s = topic title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:7
+msgid "Reply notification (multiple replies in the same topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:7
+#, php-format
+msgid "%1$s = blogname, %2$d = number or replies, %3$s = topic title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:8
+msgid "Reply e-mail subject (single reply)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:9
+msgid "Reply e-mail subject (multiple replies in the same topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:9
+#, php-format
+msgid "%1$s = blogname, %2$d = number of replies, %3$s = topic title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:10
+msgid "Reply e-mail message body"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:10
+#: templates/bp-forum-notifier-admin.php:20
+#, php-format
+msgid "%1$s = author, %2$s = topic title, %3$s = reply, %4$s = topic link"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:11
+msgid "Topic notification (single topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:11
+#: templates/bp-forum-notifier-admin.php:13
+#, php-format
+msgid "%1$s = blogname, %2$s = author, %3$s = forum title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:12
+msgid "Topic notification (multiple topics in the same forum)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:12
+#: templates/bp-forum-notifier-admin.php:14
+#, php-format
+msgid "%1$s = blogname, %2$d = number of topics, %3$s = forum title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:13
+msgid "Topic e-mail subject (single topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:14
+msgid "Topic e-mail subject (multiple topics in the same forum)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:15
+msgid "Topic e-mail message body"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:15
+#, php-format
+msgid "%1$s = author, %2$s = forum title, %3$s = topic, %4$s = topic link"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:16
+msgid "Quote notification (single quote)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:17
+msgid "Quote notification (multiple quotes in the same topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:17
+#: templates/bp-forum-notifier-admin.php:19
+#, php-format
+msgid "%1$s = blogname, %2$d = number or quotes, %3$s = topic title"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:18
+msgid "Quote e-mail subject (single quote)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:19
+msgid "Quote e-mail subject (multiple quotes in the same topic)"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:20
+msgid "Quote e-mail message body"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:21
+msgid "E-mail message body wrapper"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:21
+#, php-format
+msgid "%1$s = message bodies"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:26 includes/admin.php:73
+msgid "Forum Notifier Settings"
+msgstr ""
+
+#: templates/bp-forum-notifier-admin.php:55
+msgid "Save"
+msgstr ""
+
+#: templates/bp-forum-notifier-settings.php:6
+msgid "Forum"
+msgstr ""
+
+#: templates/bp-forum-notifier-settings.php:7
+msgid "Yes"
+msgstr ""
+
+#: templates/bp-forum-notifier-settings.php:8
+msgid "No"
+msgstr ""
+
+#: includes/admin.php:24
+#, php-format
+msgid "[%1$s] %2$d new forum activities"
+msgstr ""
+
+#: includes/admin.php:25
+#, php-format
+msgid "%2$s wrote a new reply in %3$s"
+msgstr ""
+
+#: includes/admin.php:26
+#, php-format
+msgid "%2$d new replies in %3$s"
+msgstr ""
+
+#: includes/admin.php:27
+#, php-format
+msgid "[%1$s] One new reply in %3$s"
+msgstr ""
+
+#: includes/admin.php:28
+#, php-format
+msgid "[%1$s] %2$d new replies in %3$s"
+msgstr ""
+
+#: includes/admin.php:29
+#, php-format
+msgid ""
+"%1$s wrote a reply in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+
+#: includes/admin.php:32
+#, php-format
+msgid "%2$s wrote a new topic in %3$s"
+msgstr ""
+
+#: includes/admin.php:33
+#, php-format
+msgid "%2$d new topics in %3$s"
+msgstr ""
+
+#: includes/admin.php:34
+#, php-format
+msgid "[%1$s] One new topic in %3$s"
+msgstr ""
+
+#: includes/admin.php:35
+#, php-format
+msgid "[%1$s] %2$d new topics in %3$s"
+msgstr ""
+
+#: includes/admin.php:36
+#, php-format
+msgid ""
+"%1$s wrote a topic in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+
+#: includes/admin.php:39
+#, php-format
+msgid "%2$s quoted you in %3$s"
+msgstr ""
+
+#: includes/admin.php:40
+#, php-format
+msgid "You've been quoted %2$d times in %3$s"
+msgstr ""
+
+#: includes/admin.php:41
+#, php-format
+msgid "[%1$s] You've been quoted in %3$s"
+msgstr ""
+
+#: includes/admin.php:42
+#, php-format
+msgid "[%1$s] You've been quoted %2$d times in %3$s"
+msgstr ""
+
+#: includes/admin.php:43
+#, php-format
+msgid ""
+"%1$s quoted you in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+
+#: includes/admin.php:46
+#, php-format
+msgid ""
+"%1$s\n"
+"\n"
+"--------------------\n"
+"\n"
+"You are receiving this email because you subscribed to a forum topic.\n"
+"\n"
+"Login and visit the topic to unsubscribe from these emails."
+msgstr ""
+
+#: includes/admin.php:74 includes/notifier.php:28
+msgid "Forum Notifier"
+msgstr ""
+
+#: includes/admin.php:111
+msgid "Settings updated."
+msgstr ""

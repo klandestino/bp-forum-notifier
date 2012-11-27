@@ -1,0 +1,292 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-26 14:43+0100\n"
+"PO-Revision-Date: 2012-11-26 14:52+0100\n"
+"Last-Translator: spurge <olof@klandestino.se>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: templates/bp-forum-notifier-admin.php:4
+msgid "Delay in minutes before e-mails are sent"
+msgstr "Fördröjning i minuter innan e-post skickas"
+
+#: templates/bp-forum-notifier-admin.php:5
+msgid "E-mail subject when message contains multiple forum activities"
+msgstr "Ämnesraden i e-posten när meddelandet innehåller flera olika forumaktiviteter"
+
+#: templates/bp-forum-notifier-admin.php:5
+#, php-format
+msgid "%1$s = blogname, %2$d = number of activities"
+msgstr "%1$s = bloggnamn, %2$d = antal forumaktiviteter"
+
+#: templates/bp-forum-notifier-admin.php:6
+msgid "Reply notification (single reply)"
+msgstr "Svarsnotifikation (ett svar)"
+
+#: templates/bp-forum-notifier-admin.php:6
+#: templates/bp-forum-notifier-admin.php:8
+#: templates/bp-forum-notifier-admin.php:16
+#: templates/bp-forum-notifier-admin.php:18
+#, php-format
+msgid "%1$s = blogname, %2$s = author, %3$s = topic title"
+msgstr "%1$s = bloggnamn, %2$s = författare, %3$s = trådens titel"
+
+#: templates/bp-forum-notifier-admin.php:7
+msgid "Reply notification (multiple replies in the same topic)"
+msgstr "Svarsnotifikation (flera svar i samma tråd)"
+
+#: templates/bp-forum-notifier-admin.php:7
+#, php-format
+msgid "%1$s = blogname, %2$d = number or replies, %3$s = topic title"
+msgstr "%1$s = bloggnamn, %2$d = antal svar, %3$s = trådens titel"
+
+#: templates/bp-forum-notifier-admin.php:8
+msgid "Reply e-mail subject (single reply)"
+msgstr "Svarsnotifikation som e-post, ämne (ett svar)"
+
+#: templates/bp-forum-notifier-admin.php:9
+msgid "Reply e-mail subject (multiple replies in the same topic)"
+msgstr "Svarsnotifikation som e-post, ämne (flera svar i samma tråd)"
+
+#: templates/bp-forum-notifier-admin.php:9
+#, php-format
+msgid "%1$s = blogname, %2$d = number of replies, %3$s = topic title"
+msgstr "%1$s = bloggnamn, %2$d = antal svar, %3$s = trådens titel"
+
+#: templates/bp-forum-notifier-admin.php:10
+msgid "Reply e-mail message body"
+msgstr "Svarsnotifikation som e-post, meddelande"
+
+#: templates/bp-forum-notifier-admin.php:10
+#: templates/bp-forum-notifier-admin.php:20
+#, php-format
+msgid "%1$s = author, %2$s = topic title, %3$s = reply, %4$s = topic link"
+msgstr "%1$s = författare, %2$s = trådens titel, %3$s = svaret, %4$s = trådens länk"
+
+#: templates/bp-forum-notifier-admin.php:11
+msgid "Topic notification (single topic)"
+msgstr "Trådnotifikation (en tråd)"
+
+#: templates/bp-forum-notifier-admin.php:11
+#: templates/bp-forum-notifier-admin.php:13
+#, php-format
+msgid "%1$s = blogname, %2$s = author, %3$s = forum title"
+msgstr "%1$s = bloggnamn, %2$s = författare, %3$s = forumtitel"
+
+#: templates/bp-forum-notifier-admin.php:12
+msgid "Topic notification (multiple topics in the same forum)"
+msgstr "Trådnotifikation (flera trådar i samma forum)"
+
+#: templates/bp-forum-notifier-admin.php:12
+#: templates/bp-forum-notifier-admin.php:14
+#, php-format
+msgid "%1$s = blogname, %2$d = number of topics, %3$s = forum title"
+msgstr "%1$s = bloggnamn, %2$d = antal trådar, %3$s = forumtitel"
+
+#: templates/bp-forum-notifier-admin.php:13
+msgid "Topic e-mail subject (single topic)"
+msgstr "Trådnotifikation som e-post, ämne (en tråd)"
+
+#: templates/bp-forum-notifier-admin.php:14
+msgid "Topic e-mail subject (multiple topics in the same forum)"
+msgstr "Trådnotifikation som e-post, ämne (flera trådar i samma ämne)"
+
+#: templates/bp-forum-notifier-admin.php:15
+msgid "Topic e-mail message body"
+msgstr "Trådnotifikation som e-post, meddelande"
+
+#: templates/bp-forum-notifier-admin.php:15
+#, php-format
+msgid "%1$s = author, %2$s = forum title, %3$s = topic, %4$s = topic link"
+msgstr "%1$s = författare, %2$s = forumtitel, %3$s = tråd, %4$s = trådens länk"
+
+#: templates/bp-forum-notifier-admin.php:16
+msgid "Quote notification (single quote)"
+msgstr "Citatnotifikation (ett citat)"
+
+#: templates/bp-forum-notifier-admin.php:17
+msgid "Quote notification (multiple quotes in the same topic)"
+msgstr "Citatnotifikation (flera citat i samma tråd)"
+
+#: templates/bp-forum-notifier-admin.php:17
+#: templates/bp-forum-notifier-admin.php:19
+#, php-format
+msgid "%1$s = blogname, %2$d = number or quotes, %3$s = topic title"
+msgstr "%1$s = bloggnamn, %2$d = antal citat, %3$s = trådens titel"
+
+#: templates/bp-forum-notifier-admin.php:18
+msgid "Quote e-mail subject (single quote)"
+msgstr "Citatnotifikation som e-post, ämne (ett citat)"
+
+#: templates/bp-forum-notifier-admin.php:19
+msgid "Quote e-mail subject (multiple quotes in the same topic)"
+msgstr "Citatnotifikation som e-post, ämne (flera citat i samma tråd)"
+
+#: templates/bp-forum-notifier-admin.php:20
+msgid "Quote e-mail message body"
+msgstr "Citatnotifikation som e-post, meddelande"
+
+#: templates/bp-forum-notifier-admin.php:21
+msgid "E-mail message body wrapper"
+msgstr "E-postmeddelandets omslutning"
+
+#: templates/bp-forum-notifier-admin.php:21
+#, php-format
+msgid "%1$s = message bodies"
+msgstr "%1$s = meddelanden"
+
+#: templates/bp-forum-notifier-admin.php:26
+#: includes/admin.php:73
+msgid "Forum Notifier Settings"
+msgstr "Forumnotifieringsinställningar"
+
+#: templates/bp-forum-notifier-admin.php:55
+msgid "Save"
+msgstr "Spara"
+
+#: templates/bp-forum-notifier-settings.php:6
+msgid "Forum"
+msgstr "Forum"
+
+#: templates/bp-forum-notifier-settings.php:7
+msgid "Yes"
+msgstr "Ja"
+
+#: templates/bp-forum-notifier-settings.php:8
+msgid "No"
+msgstr "Nej"
+
+#: includes/admin.php:24
+#, php-format
+msgid "[%1$s] %2$d new forum activities"
+msgstr "[%1$s] %2$d nya forumaktiveter"
+
+#: includes/admin.php:25
+#, php-format
+msgid "%2$s wrote a new reply in %3$s"
+msgstr "%2$s skrev ett nytt svar i %3$s"
+
+#: includes/admin.php:26
+#, php-format
+msgid "%2$d new replies in %3$s"
+msgstr "%2$d nya svar i %3$s"
+
+#: includes/admin.php:27
+#, php-format
+msgid "[%1$s] One new reply in %3$s"
+msgstr "[%1$s] Ett nytt svar i %3$s"
+
+#: includes/admin.php:28
+#, php-format
+msgid "[%1$s] %2$d new replies in %3$s"
+msgstr "[%1$s] %2$d nya svar i %3$s"
+
+#: includes/admin.php:29
+#, php-format
+msgid ""
+"%1$s wrote a reply in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+"%1$s skrev ett svar i %2$s:\n"
+"%3$s\n"
+"Länk: %4$s"
+
+#: includes/admin.php:32
+#, php-format
+msgid "%2$s wrote a new topic in %3$s"
+msgstr "%2$s startade en ny tråd i %3$s"
+
+#: includes/admin.php:33
+#, php-format
+msgid "%2$d new topics in %3$s"
+msgstr "%2$d nya trådar i %3$s"
+
+#: includes/admin.php:34
+#, php-format
+msgid "[%1$s] One new topic in %3$s"
+msgstr "[%1$s] En ny tråd i %3$s"
+
+#: includes/admin.php:35
+#, php-format
+msgid "[%1$s] %2$d new topics in %3$s"
+msgstr "[%1$s] %2$d nya trådar i %3$s"
+
+#: includes/admin.php:36
+#, php-format
+msgid ""
+"%1$s wrote a topic in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+"%1$s startade en ny tråd i %2$s:\n"
+"%3$s\n"
+"Länk: %4$s"
+
+#: includes/admin.php:39
+#, php-format
+msgid "%2$s quoted you in %3$s"
+msgstr "%2$s citerade dig i %3$s"
+
+#: includes/admin.php:40
+#, php-format
+msgid "You've been quoted %2$d times in %3$s"
+msgstr "Du är citerad %2$d gånger i %3$s"
+
+#: includes/admin.php:41
+#, php-format
+msgid "[%1$s] You've been quoted in %3$s"
+msgstr "[%1$s] Du är citerad i %3$s"
+
+#: includes/admin.php:42
+#, php-format
+msgid "[%1$s] You've been quoted %2$d times in %3$s"
+msgstr "[%1$s] Du är citerad %2$d gånger i %3$s"
+
+#: includes/admin.php:43
+#, php-format
+msgid ""
+"%1$s quoted you in %2$s:\n"
+"%3$s\n"
+"Post Link: %4$s"
+msgstr ""
+"%1$s citerade dig i %2$s:\n"
+"%3$s\n"
+"Länk: %4$s"
+
+#: includes/admin.php:46
+#, php-format
+msgid ""
+"%1$s\n"
+"\n"
+"--------------------\n"
+"\n"
+"You are receiving this email because you subscribed to a forum topic.\n"
+"\n"
+"Login and visit the topic to unsubscribe from these emails."
+msgstr ""
+"%1$s\n"
+"\n"
+"--------------------\n"
+"\n"
+"Detta meddelande går inte att svara på... För att svara på detta foruminlägg, klicka på länken ovan."
+
+#: includes/admin.php:74
+#: includes/notifier.php:28
+msgid "Forum Notifier"
+msgstr "Forumnotifieringar"
+
+#: includes/admin.php:111
+msgid "Settings updated."
+msgstr "Inställningar uppdaterade."
+

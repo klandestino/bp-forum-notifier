@@ -143,14 +143,24 @@ class BP_Forum_Notifier extends BP_Component {
 			}
 
 			foreach( $group_ids as $group_id ) {
-				$members = groups_get_group_members( $group_id );
+				$users = groups_get_group_members( $group_id );
+				// For some reason, admins and moderators are not included in the members array :(
+				$users = array_merge( $users[ 'members' ], groups_get_group_admins( $group_id ), groups_get_group_mods( $group_id ) ) ;
+				// Used for checking duplicates
+				$sent = array();
 
-				foreach( $members[ 'members' ] as $member ) {
-					if( $member->user_id != $topic_author ) {
+				foreach( $users as $member ) {
+					if( $member->user_id != $topic_author && ! in_array( $member->user_id, $sent ) ) {
+						// Add for duplicate check
+						$sent[] = $member->user_id;
+						// Send
 						bp_core_add_notification( $topic_id, $member->user_id, $this->id, 'new_topic_' . $forum_id, $forum_id );
 						$this->add_notification_email( $member->user_id, 0, $topic_id, $forum_id, $topic_author, 'new_topic_' . $forum_id, 'notification_forum_group_new_topic' );
 					}
 				}
+
+				unset( $sent );
+				unset( $users );
 			}
 		}
 	}
@@ -172,10 +182,12 @@ class BP_Forum_Notifier extends BP_Component {
 		// Get topic subscribers
 		$user_ids = bbp_get_topic_subscribers( $topic_id, true );
 
-		foreach( $user_ids as $user_id ) {
-			if( $user_id != $reply_author ) {
-				bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_reply_' . $topic_id, $topic_id );
-				$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe' );
+		if( is_array( $user_ids ) ) {
+			foreach( $user_ids as $user_id ) {
+				if( $user_id != $reply_author ) {
+					bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_reply_' . $topic_id, $topic_id );
+					$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe' );
+				}
 			}
 		}
 
@@ -333,8 +345,7 @@ function bp_forum_notifier_messages_format( $action, $item_id, $secondary_item_i
 				$link = bbp_get_forum_permalink( $secondary_item_id );
 				$setting_string = 'topic-notification-multi';
 			} else {
-				$total_items = get_userdata( $item_id );
-				$total_items = $total_items->display_name;
+				$total_items = bbp_get_topic_author_display_name( $item_id );
 			}
 
 			$text = sprintf(

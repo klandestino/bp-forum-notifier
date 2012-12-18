@@ -18,7 +18,7 @@ class BP_Forum_Notifier_Admin {
 	 * @return array
 	 */
 	static public function get_settings() {
-		$settings = get_site_option( 'bp_forum_notifier_settings', array() );
+		$settings = get_option( 'bp_forum_notifier_settings', get_site_option( 'bp_forum_notifier_settings', array() ) );
 		$defaults = array(
 			'mail-delay' => '15',
 			'multiple-mail-messages-subject' => __( '[%1$s] %2$d new forum activities', 'bp-forum-notifier' ),
@@ -103,7 +103,7 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 				}
 			}
 
-			update_site_option( 'bp_forum_notifier_settings', $settings );
+			update_option( 'bp_forum_notifier_settings', $settings );
 			wp_redirect( add_query_arg( array( 'forum-notifier-updated' => '1' ) ) );
 		} elseif( array_key_exists( 'forum-notifier-updated', $_GET ) ) {
 			add_action( 'admin_notices', create_function( '', sprintf(

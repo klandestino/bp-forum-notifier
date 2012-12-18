@@ -1,36 +1,30 @@
 <?php
 
-require_once( ABSPATH . WPINC . '/class-phpmailer.php' );
-require_once( ABSPATH . WPINC . '/class-smtp.php' );
-
 /**
- * Extends PHPMailer, filters emails and hooks the Send-method
- * for digestion.
+ * Class for sending e-mail notifications and digestions
  */
 class BP_Forum_Notifier_Mailer {
 
 	/**
 	 */
 	static public function __setup() {
-		// Hook the wp_mail with this filter and catch all emails that should be digested.
-		add_filter( 'wp_mail', array( BP_Forum_Notifier_Mailer, 'filter_emails_and_digest' ), 10, 5 );
+		// Log emails going out
+		add_filter( 'wp_mail', array( BP_Forum_Notifier_Mailer, 'log' ), 10, 5 );
 
 		// Add scheduled action for delayed e-mails
 		add_action( 'bp_forum_notifier_scheduled_email', array( BP_Forum_Notifier_Mailer, 'send_notification_email' ), 1, 1 );
 	}
 
 	/**
-	 * Filters wp_mail emails by pattern and digest
-	 * @see wp_mail
-	 * @param string $mail
-	 * @return array
+	 * Log whatever and return it
+	 * @param mixed $whatever
+	 * @return mixes $whatever
 	 */
-	static public function filter_emails_and_digest( $mail ) {
-		$file = fopen( '/tmp/naturkontakt-mail', 'a' );
-		fwrite( $file, var_export( $mail, true ) );
+	static public function log( $whatever ) {
+		$file = fopen( '/tmp/bp-forum-notifier.log', 'a' );
+		fwrite( $file, var_export( $whatever, true ) );
 		fclose( $file );
-
-		return $mail;
+		return $whatever;
 	}
 
 	/**
@@ -43,6 +37,8 @@ class BP_Forum_Notifier_Mailer {
 		if( empty( $mail_properties ) || ! is_array( $mail_properties ) ) {
 			$mail_properties = get_user_meta( $user_id, 'bp_forum_notifier_emails' );
 		}
+
+		self::log( $mail_properties );
 
 		if( ! is_array( $mail_properties ) ) {
 			// Fail, no e-mails found

@@ -11,11 +11,13 @@ Tested up to: 3.4.2
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
 Author: spurge
 Author URI: https://github.com/spurge
-Network: true
 */
 
+// Where am I?
+$plugin_dir = ! empty( $network_plugin ) ? $network_plugin : $plugin;
+
 // Set symlink friendly dir constant
-define( 'BP_FORUM_NOTIFIER_PLUGIN_DIR', dirname( $network_plugin ) );
+define( 'BP_FORUM_NOTIFIER_PLUGIN_DIR', dirname( $plugin_dir ) );
 
 // Where to find plugin templates
 // Used by BP_Forum_Notifier::get_template

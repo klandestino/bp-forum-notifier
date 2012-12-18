@@ -9,7 +9,7 @@ class BP_Forum_Notifier_Admin {
 	static public function init() {
 		if( is_site_admin() ) {
 			add_action( 'admin_init', array( BP_Forum_Notifier_Admin, 'admin_page_save' ) );
-			add_action( 'network_admin_menu', array( BP_Forum_Notifier_Admin, 'admin_menu' ) );
+			add_action( 'admin_menu', array( BP_Forum_Notifier_Admin, 'admin_menu' ) );
 		}
 	}
 
@@ -69,7 +69,7 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 	 */
 	public static function admin_menu() {
 		add_submenu_page(
-			'settings.php',
+			'options-general.php',
 			__( 'Forum Notifier Settings', 'bp-forum-notifier' ),
 			__( 'Forum Notifier', 'bp-forum-notifier' ),
 			'manage_options',
@@ -106,7 +106,7 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 			update_site_option( 'bp_forum_notifier_settings', $settings );
 			wp_redirect( add_query_arg( array( 'forum-notifier-updated' => '1' ) ) );
 		} elseif( array_key_exists( 'forum-notifier-updated', $_GET ) ) {
-			add_action( 'network_admin_notices', create_function( '', sprintf(
+			add_action( 'admin_notices', create_function( '', sprintf(
 				'echo "<div class=\"updated\"><p>%s</p></div>";',
 				__( 'Settings updated.', 'bp-forum-notifier' )
 			) ) );

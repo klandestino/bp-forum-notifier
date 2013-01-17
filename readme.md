@@ -5,7 +5,7 @@ BuddyPress Forum Notifier
 * Tags: buddypress, groups, forum, bbpress, notifications
 * Requires at least: WordPress 3.4.2, BuddyPress 1.6.1, BBPress 2.2
 * Tested up to: WordPress 3.5, BuddyPress 1.6.2, BBPress 2.2.3
-* Stable tag: 1.2
+* Stable tag: 1.3
 
 Sends on-site notifications on forum events that bbpress doesn't handle.
 
@@ -26,13 +26,6 @@ Description
 * English (built-in)
 * Swedish
 
-### Coming features
-
-* More events
-* Subscription on a whole forum
-* Digested email notifications - all forum activity merged into one
-  email sent every week or day.
-
 Installation
 ------------
 
@@ -46,7 +39,16 @@ Installation
 Changelog
 ---------
 
-### 1.2
+### v1.3
+
+* Fixed issue with double notifications and emails when quoting a
+  subscriber.
+* Checking if user is group member or allowed to read in hidden or
+  private forums before sending notifications.
+* Fixed links to right replies in topics.
+* Deleting notifications when entering topics.
+
+### v1.2
 
 * Fixed issue with admins and moderators not getting group forum
   notifications.

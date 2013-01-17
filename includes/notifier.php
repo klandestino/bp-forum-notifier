@@ -272,6 +272,18 @@ class BP_Forum_Notifier extends BP_Component {
 		}
 
 		if( isset( $post_id ) ) {
+			$topic_id = get_post_meta( $post_id, '_bbp_topic_id' );
+
+			if( is_array( $topic_id ) ) {
+				$topic_id = reset( $topic_id );
+			}
+
+			if( $topic_id ) {
+				bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_topic_' . $topic_id );
+				bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_reply_' . $topic_id );
+				bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_quote_' . $topic_id );
+			}
+
 			bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_topic_' . $post_id );
 			bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_reply_' . $post_id );
 			bp_core_delete_notifications_by_type( get_current_user_id(), $this->id, 'new_quote_' . $post_id );

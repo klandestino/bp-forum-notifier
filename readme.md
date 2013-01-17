@@ -5,7 +5,7 @@ BuddyPress Forum Notifier
 * Tags: buddypress, groups, forum, bbpress, notifications
 * Requires at least: WordPress 3.4.2, BuddyPress 1.6.1, BBPress 2.2
 * Tested up to: WordPress 3.5, BuddyPress 1.6.2, BBPress 2.2.3
-* Stable tag: 1.3
+* Stable tag: 1.3.1
 
 Sends on-site notifications on forum events that bbpress doesn't handle.
 
@@ -38,6 +38,11 @@ Installation
   
 Changelog
 ---------
+
+### v1.3.1
+
+* Fixed issue with notifications not getting deleted when visiting a
+  paged topic.
 
 ### v1.3
 

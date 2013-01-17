@@ -154,8 +154,8 @@ class BP_Forum_Notifier extends BP_Component {
 						// Add for duplicate check
 						$sent[] = $member->user_id;
 						// Send
-						bp_core_add_notification( $topic_id, $member->user_id, $this->id, 'new_topic_' . $forum_id, $forum_id );
-						$this->add_notification_email( $member->user_id, 0, $topic_id, $forum_id, $topic_author, 'new_topic_' . $forum_id, 'notification_forum_group_new_topic' );
+						bp_core_add_notification( $topic_id, $member->user_id, $this->id, 'new_topic_' . $topic_id, $forum_id );
+						$this->add_notification_email( $member->user_id, 0, $topic_id, $forum_id, $topic_author, 'new_topic_' . $topic_id, 'notification_forum_group_new_topic' );
 					}
 				}
 
@@ -197,12 +197,12 @@ class BP_Forum_Notifier extends BP_Component {
 		if( is_array( $quote_user_id ) ) {
 			foreach( $quote_user_id as $user_id ) {
 				if( $user_id && $user_id != $reply_author ) {
-					bp_core_add_notification( $reply_author, $user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
+					bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
 					$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_quote_' . $topic_id, 'notification_forum_quoted' );
 				}
 			}
 		} elseif( is_numeric( $quote_user_id ) && $quote_user_id && $quote_user_id != $reply_author ) {
-			bp_core_add_notification( $reply_author, $quote_user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
+			bp_core_add_notification( $reply_id, $quote_user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
 			$this->add_notification_email( $quote_user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_quote_' . $topic_id, 'notification_forum_quoted' );
 		}
 	}
@@ -297,7 +297,7 @@ class BP_Forum_Notifier extends BP_Component {
 				BP_Forum_Notifier_Mailer::send_notification_email( $user_id, compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
 			}
 		}
-	}	
+	}
 
 	/**
 	 * Displays a edit screen for notifications inside the buddypress notification settings form
@@ -357,14 +357,13 @@ function bp_forum_notifier_messages_format( $action, $item_id, $secondary_item_i
 			break;
 
 		case 'reply':
-			$link = bbp_get_topic_permalink( $secondary_item_id );
+			$link = bbp_get_reply_url( $item_id );
 			$setting_string = 'reply-notification-single';
 
 			if( $total_items > 1 ) {
 				$setting_string = 'reply-notification-multi';
 			} else {
-				$total_items = get_userdata( $item_id );
-				$total_items = $total_items->display_name;
+				$total_items = bbp_get_reply_author_display_name( $item_id );
 			}
 
 			$text = sprintf(
@@ -376,14 +375,13 @@ function bp_forum_notifier_messages_format( $action, $item_id, $secondary_item_i
 			break;
 
 		case 'quote':
-			$link = bbp_get_topic_permalink( $secondary_item_id );
+			$link = bbp_get_reply_url( $item_id );
 			$setting_string = 'quote-notification-single';
 
 			if( $total_items > 1 ) {
 				$setting_string = 'quote-notification-multi';
 			} else {
-				$total_items = get_userdata( $item_id );
-				$total_items = $total_items->display_name;
+				$total_items = bbp_get_reply_author_display_name( $item_id );
 			}
 
 			$text = sprintf(

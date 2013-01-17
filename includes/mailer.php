@@ -87,7 +87,7 @@ class BP_Forum_Notifier_Mailer {
 						$author->display_name,
 						bbp_get_topic_title( $topic_id ),
 						strip_tags( bbp_get_reply_content( $reply_id ) ),
-						bbp_get_topic_permalink( $topic_id )
+						bbp_get_reply_url( $reply_id )
 					);
 					break;
 
@@ -104,7 +104,7 @@ class BP_Forum_Notifier_Mailer {
 						$author->display_name,
 						bbp_get_topic_title( $topic_id ),
 						strip_tags( bbp_get_reply_content( $reply_id ) ),
-						bbp_get_topic_permalink( $topic_id )
+						bbp_get_reply_url( $reply_id )
 					);
 					break;
 			}

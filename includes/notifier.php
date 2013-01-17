@@ -121,6 +121,56 @@ class BP_Forum_Notifier extends BP_Component {
 	}
 
 	/**
+	 * Checks if user is member of group forum or allowed to know whats going in a hidden or private forum.
+	 * @param int $user_id
+	 * @param int $forum_id
+	 * @return boolean
+	 */
+	public function is_forum_member( $user_id, $forum_id ) {
+		/**
+		 * Is this a group forum and is this user a member?
+		 */
+
+		$groups = get_post_meta( $forum_id, '_bbp_group_ids', array() );
+
+		foreach( $groups as $group_ids ) {
+			if( ! is_array( $group_ids ) ) {
+				$group_ids = array( $group_ids );
+			}
+
+			foreach( $group_ids as $group_id ) {
+				if(
+					groups_is_user_admin( $user_id, $group_id )
+					|| groups_is_user_mod( $user_id, $group_id )
+					|| groups_is_user_member( $user_id, $group_id )
+				) {
+					return true;
+				}
+			}
+		}
+
+		/**
+		 * Is this a private or hidden forum and is this user allowed?
+		 */
+
+		$forum_status = bbp_get_forum_visibility( $forum_id );
+
+		if(
+			$forum_status == bbp_get_public_status_id()
+			|| ( $forum_status == bbp_get_private_status_id() && user_can( $user_id, 'read_private_forums' ) )
+			|| ( $forum_status == bbp_get_hidden_status_id() && user_can( $user_id, 'read_hidden_forums' ) )
+		) {
+			return true;
+		}
+
+		/**
+		 * Or else return false
+		 */
+
+		return false;
+	}
+
+	/**
 	 * Adds a new topic notification
 	 * At the moment this functions looks for a group connection and
 	 * notifies all the group members.
@@ -137,6 +187,9 @@ class BP_Forum_Notifier extends BP_Component {
 		// Get groups if there are any
 		$groups = get_post_meta( $forum_id, '_bbp_group_ids', array() );
 
+		// Used for checking duplicates
+		$sent = array();
+
 		foreach( $groups as $group_ids ) {
 			if( ! is_array( $group_ids ) ) {
 				$group_ids = array( $group_ids );
@@ -146,8 +199,6 @@ class BP_Forum_Notifier extends BP_Component {
 				$users = groups_get_group_members( $group_id );
 				// For some reason, admins and moderators are not included in the members array :(
 				$users = array_merge( $users[ 'members' ], groups_get_group_admins( $group_id ), groups_get_group_mods( $group_id ) ) ;
-				// Used for checking duplicates
-				$sent = array();
 
 				foreach( $users as $member ) {
 					if( $member->user_id != $topic_author && ! in_array( $member->user_id, $sent ) ) {
@@ -179,31 +230,30 @@ class BP_Forum_Notifier extends BP_Component {
 	 * @return void
 	 */
 	public function add_reply_notification( $reply_id, $topic_id, $forum_id, $anonymous_data, $reply_author ) {
+		// See if there's any quotes
+		$quote_user_ids = get_post_meta( $reply_id, '_bbpqor_replyuserid' );
+
+		if( ! is_array( $quote_user_ids ) ) {
+			$quote_user_ids = array( $quote_user_id );
+		}
+
+		foreach( $quote_user_ids as $user_id ) {
+			if( is_numeric( $user_id ) && $user_id != $reply_author && $this->is_forum_member( $user_id, $forum_id ) ) {
+				bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
+				$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_quote_' . $topic_id, 'notification_forum_quoted' );
+			}
+		}
+
 		// Get topic subscribers
 		$user_ids = bbp_get_topic_subscribers( $topic_id, true );
 
 		if( is_array( $user_ids ) ) {
 			foreach( $user_ids as $user_id ) {
-				if( $user_id != $reply_author ) {
+				if( $user_id != $reply_author && ! in_array( $user_id, $quote_user_ids ) && $this->is_forum_member( $user_id, $forum_id ) ) {
 					bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_reply_' . $topic_id, $topic_id );
 					$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe' );
 				}
 			}
-		}
-
-		// See if there's any quotes
-		$quote_user_id = get_post_meta( $reply_id, '_bbpqor_replyuserid' );
-
-		if( is_array( $quote_user_id ) ) {
-			foreach( $quote_user_id as $user_id ) {
-				if( $user_id && $user_id != $reply_author ) {
-					bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
-					$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_quote_' . $topic_id, 'notification_forum_quoted' );
-				}
-			}
-		} elseif( is_numeric( $quote_user_id ) && $quote_user_id && $quote_user_id != $reply_author ) {
-			bp_core_add_notification( $reply_id, $quote_user_id, $this->id, 'new_quote_' . $topic_id, $topic_id );
-			$this->add_notification_email( $quote_user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_quote_' . $topic_id, 'notification_forum_quoted' );
 		}
 	}
 

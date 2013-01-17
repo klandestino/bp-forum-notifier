@@ -33,36 +33,36 @@ class BP_Forum_Notifier extends BP_Component {
 		$this->settings = BP_Forum_Notifier_Admin::get_settings();
 
 		// Wordpress init
-		add_action( 'init', array( $this, 'init' ) );
+		add_action( 'init', array( &$this, 'init' ) );
 
 		/**
 		 * Actions and filters for notification adding and deleting
 		 */
 
 		// Add new topic notification when a new topic is created
-		add_action( 'bbp_new_topic', array( $this, 'add_topic_notification' ), 10, 4 );
+		add_action( 'bbp_new_topic', array( &$this, 'add_topic_notification' ), 10, 4 );
 		// Add new reply notification when a new reply is created
-		add_action( 'bbp_new_reply', array( $this, 'add_reply_notification' ), 10, 5 );
+		add_action( 'bbp_new_reply', array( &$this, 'add_reply_notification' ), 10, 5 );
 		// Delete all notifications connected to a forum, topic or reply.
 		// Forums, topics and replies are posts with post_types forum, topic and reply.
 		// That's why we're using the_post action.
-		add_action( 'the_post', array( $this, 'delete_notifications' ) );
+		add_action( 'the_post', array( &$this, 'delete_notifications' ) );
 		// Delete notifications if post is deleted
-		add_action( 'delete_post', array( $this, 'delete_notifications' ) );
+		add_action( 'delete_post', array( &$this, 'delete_notifications' ) );
 		// Delete notifications if post is trashed
-		add_action( 'wp_trash_post', array( $this, 'delete_notifications' ) );
+		add_action( 'wp_trash_post', array( &$this, 'delete_notifications' ) );
 
 		/**
 		 * Actions and filters for settings
 		 */
 
 		// Action run when displaying notification settings (enable or disable emails)
-		add_action( 'bp_notification_settings', array( $this, 'settings_screen' ) );
+		add_action( 'bp_notification_settings', array( &$this, 'settings_screen' ) );
 		// Filter that modifies new reply notification for topic subscribers subject within bbpress
 		// Used atm to disable bbpress own e-mail notification as this plugin does it instead.
-		add_filter( 'bbp_subscription_mail_title', array( $this, 'reply_mail_subject' ), 2, 4 );
+		add_filter( 'bbp_subscription_mail_title', array( &$this, 'reply_mail_subject' ), 2, 4 );
 		// Filter that modifies new reply notification for topic subscribers message body within bbpress
-		//add_filter( 'bbp_subscription_mail_message', array( $this, 'reply_mail_message' ), 2, 4 );
+		//add_filter( 'bbp_subscription_mail_message', array( &$this, 'reply_mail_message' ), 2, 4 );
 	}
 
 	/**

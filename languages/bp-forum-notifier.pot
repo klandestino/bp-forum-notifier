@@ -166,6 +166,18 @@ msgstr ""
 msgid "No"
 msgstr ""
 
+#: templates/bp-forum-notifier-settings.php:15
+msgid "Someone replies in one of your subscribed threads"
+msgstr ""
+
+#: templates/bp-forum-notifier-settings.php:21
+msgid "Someone creates a new thread in one of your groups"
+msgstr ""
+
+#: templates/bp-forum-notifier-settings.php:27
+msgid "Someone quotes or mentions you"
+msgstr ""
+
 #: includes/admin.php:24
 #, php-format
 msgid "[%1$s] %2$d new forum activities"

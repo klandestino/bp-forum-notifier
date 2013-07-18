@@ -166,6 +166,18 @@ msgstr "Ja"
 msgid "No"
 msgstr "Nej"
 
+#: templates/bp-forum-notifier-settings.php:15
+msgid "Someone replies in one of your subscribed threads"
+msgstr "En medlem skriver en ny kommentar i en bevakad tråd"
+
+#: templates/bp-forum-notifier-settings.php:21
+msgid "Someone creates a new thread in one of your groups"
+msgstr "En medlem skapar en ny tråd i någon grupp du är medlem i"
+
+#: templates/bp-forum-notifier-settings.php:27
+msgid "Someone quotes or mentions you"
+msgstr "En medlem svarar eller citerar dig"
+
 #: includes/admin.php:24
 #, php-format
 msgid "[%1$s] %2$d new forum activities"

@@ -7,7 +7,7 @@ class BP_Forum_Notifier_Admin {
 	}
 
 	static public function init() {
-		if( is_site_admin() ) {
+		if( is_super_admin() ) {
 			add_action( 'admin_init', array( BP_Forum_Notifier_Admin, 'admin_page_save' ) );
 			add_action( 'admin_menu', array( BP_Forum_Notifier_Admin, 'admin_menu' ) );
 		}

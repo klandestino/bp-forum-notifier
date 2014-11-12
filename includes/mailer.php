@@ -9,7 +9,7 @@ class BP_Forum_Notifier_Mailer {
 	 */
 	static public function __setup() {
 		// Log emails going out
-		//add_filter( 'wp_mail', array( 'BP_Forum_Notifier_Mailer', 'log' ), 10, 5 );
+		add_filter( 'wp_mail', array( 'BP_Forum_Notifier_Mailer', 'log' ), 10, 5 );
 
 		// Add scheduled action for delayed e-mails
 		add_action( 'bp_forum_notifier_scheduled_email', array( 'BP_Forum_Notifier_Mailer', 'send_notification_email' ), 1, 1 );

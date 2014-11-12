@@ -1,6 +1,7 @@
 <?php global $settings;
 
 $fields = array(
+	'notifications-for-all-replies' => array( 'checkbox', __( 'Always notify on replies', 'bp-forum-notifier' ), __( 'In older versions (< 1.4) the plugin would only notify members of new replies if they had "subscribed" to the topic. By checking this box groupmembers will get notifications from all replies in group forums.', 'bp-forum-notifier' ) ),
 	'mail-delay' => array( 'textfield', __( 'Delay in minutes before e-mails are sent', 'bp-forum-notifier' ) ),
 	'multiple-mail-messages-subject' => array( 'textfield', __( 'E-mail subject when message contains multiple forum activities', 'bp-forum-notifier' ), __( '%1$s = blogname, %2$d = number of activities', 'bp-forum-notifier' ) ),
 	'reply-notification-single' => array( 'textfield', __( 'Reply notification (single reply)', 'bp-forum-notifier' ), __( '%1$s = blogname, %2$s = author, %3$s = topic title', 'bp-forum-notifier' ) ),
@@ -39,6 +40,8 @@ $fields = array(
 								<input id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" type="textfield" class="large-text" value="<?php echo esc_attr( $settings[ $field_name ] ); ?>" />
 							<?php elseif( $field[ 0 ] == 'textarea' ) : ?>
 								<textarea id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" class="large-text"><?php echo $settings[ $field_name ]; ?></textarea>
+							<?php elseif( $field[ 0 ] == 'checkbox' ) : ?>
+								<input id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" type="checkbox" value="yes" <?php checked( $settings[ $field_name ], 'yes', true ) ?> />
 							<?php endif; ?>
 
 							<?php if( array_key_exists( 2, $field ) ) : ?>

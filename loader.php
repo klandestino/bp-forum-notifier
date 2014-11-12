@@ -57,3 +57,17 @@ function bp_forum_notifier_add_active_component( $components ) {
 
 // Setup active components with bp_active_components filter
 add_filter( 'bp_active_components', 'bp_forum_notifier_add_active_component' );
+
+/**
+ * Check if admin has enabled the "new functionality" for notifying group members on all forum replies
+ * @return bool
+ */
+function bp_forum_notifier_notify_on_all_replies() {
+	$settings = get_option( 'bp_forum_notifier_settings', get_site_option( 'bp_forum_notifier_settings', array() ) );
+
+	if ( $settings['notifications-for-all-replies'] == 'yes' ) {
+		return true;
+	} else {
+		return false;
+	}
+}

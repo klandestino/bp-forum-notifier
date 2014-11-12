@@ -3,13 +3,13 @@
 class BP_Forum_Notifier_Admin {
 
 	static public function __setup() {
-		add_action( 'init', array( BP_Forum_Notifier_Admin, 'init' ) );
+		add_action( 'init', array( 'BP_Forum_Notifier_Admin', 'init' ) );
 	}
 
 	static public function init() {
 		if( is_super_admin() ) {
-			add_action( 'admin_init', array( BP_Forum_Notifier_Admin, 'admin_page_save' ) );
-			add_action( 'admin_menu', array( BP_Forum_Notifier_Admin, 'admin_menu' ) );
+			add_action( 'admin_init', array( 'BP_Forum_Notifier_Admin', 'admin_page_save' ) );
+			add_action( 'admin_menu', array( 'BP_Forum_Notifier_Admin', 'admin_menu' ) );
 		}
 	}
 
@@ -74,7 +74,7 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 			__( 'Forum Notifier', 'bp-forum-notifier' ),
 			'manage_options',
 			'forum-notifier',
-			array( BP_Forum_Notifier_Admin, 'admin_page' )
+			array( 'BP_Forum_Notifier_Admin', 'admin_page' )
 		);
 	}
 
@@ -96,7 +96,7 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 		if( array_key_exists( 'forum-notifier-save', $_POST ) ) {
 			check_admin_referer( 'bp_forum_notifier_admin' );
 			$settings = self::get_settings();
-			
+
 			foreach( $settings as $key => $val ) {
 				if( array_key_exists( $key, $_POST ) ) {
 					$settings[ $key ] = $_POST[ $key ];

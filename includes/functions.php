@@ -35,7 +35,7 @@ function bp_forum_notifier_toggle_subscription() {
 			$users = array();
 		}
 		if ( $_POST['subscribe_or_unsubscribe'] == 'unsubscribe' && ! in_array( bp_loggedin_user_id(), $users ) ) {
-			$users = array_push( $users, bp_loggedin_user_id() );
+			$users[] = bp_loggedin_user_id();
 		} elseif ( $_POST['subscribe_or_unsubscribe'] == 'subscribe' && is_int( $key = array_search( bp_loggedin_user_id(), $users ) ) ) {
 			unset( $users[$key] );
 		}

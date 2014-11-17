@@ -30,6 +30,11 @@ BP_Forum_Notifier_Mailer::__setup();
 require_once( dirname( __FILE__ ) . '/includes/admin.php' );
 BP_Forum_Notifier_Admin::__setup();
 
+if ( bp_forum_notifier_notify_on_all_replies() ) :
+	// Custom plugin functions for new notify on all replies functionality
+	require_once( dirname( __FILE__ ) . '/includes/functions.php' );
+endif;
+
 /**
  * Initiates this plugin by setting up the forum notifier component.
  * @return void
@@ -57,6 +62,14 @@ function bp_forum_notifier_add_active_component( $components ) {
 
 // Setup active components with bp_active_components filter
 add_filter( 'bp_active_components', 'bp_forum_notifier_add_active_component' );
+
+// Enqueues js if new notify on all replies functionality is activated
+function bp_forum_notifier_enqueue_scripts() {
+	if ( bp_forum_notifier_notify_on_all_replies() && bp_is_groups_component() && bp_is_current_action( 'forum' ) ) {
+		wp_enqueue_script( 'bp-forum-notifier', WP_PLUGIN_URL . '/' . basename( __DIR__ ) . '/js/bp-forum-notifier.js', array( 'jquery' ), '1.4', true );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'bp_forum_notifier_enqueue_scripts' );
 
 /**
  * Check if admin has enabled the "new functionality" for notifying group members on all forum replies

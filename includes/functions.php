@@ -31,9 +31,7 @@ function bp_forum_notifier_toggle_subscription() {
 	$group_id = absint( $_POST['group_id'] );
 
 	if ( groups_is_user_member( bp_loggedin_user_id(), $group_id ) ) {
-		if ( ! $users = groups_get_groupmeta( $group_id, 'bp-forum-notifier-mail-unsubscribe' ) ) {
-			$users = array();
-		}
+		$users = groups_get_groupmeta( $group_id, 'bp-forum-notifier-mail-unsubscribe' );
 		if ( $_POST['subscribe_or_unsubscribe'] == 'unsubscribe' && ! in_array( bp_loggedin_user_id(), $users ) ) {
 			$users[] = bp_loggedin_user_id();
 		} elseif ( $_POST['subscribe_or_unsubscribe'] == 'subscribe' && is_int( $key = array_search( bp_loggedin_user_id(), $users ) ) ) {

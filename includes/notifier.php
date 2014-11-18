@@ -206,7 +206,7 @@ class BP_Forum_Notifier extends BP_Component {
 						$sent[] = $member->user_id;
 						// Send
 						bp_core_add_notification( $topic_id, $member->user_id, $this->id, 'new_topic_' . $topic_id, $forum_id );
-						$this->add_notification_email( $member->user_id, 0, $topic_id, $forum_id, $topic_author, 'new_topic_' . $topic_id, 'notification_forum_group_new_topic' );
+						$this->add_notification_email( $member->user_id, 0, $topic_id, $forum_id, $topic_author, 'new_topic_' . $topic_id, 'notification_forum_group_new_topic', $group_id );
 					}
 				}
 
@@ -347,16 +347,32 @@ class BP_Forum_Notifier extends BP_Component {
 	 * @param string $setting
 	 * @return void
 	 */
-	public function add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $author_id, $action, $setting ) {
-		if( bp_get_user_meta( $user_id, $setting, true ) != 'no' ) {
-			if( $this->settings[ 'mail-delay' ] ) {
-				add_user_meta( $user_id, 'bp_forum_notifier_emails', compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
+	public function add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $author_id, $action, $setting, $group_id ) {
+		// Check if we're using the legacy notifier functions or the > 1.4 notifierhose
+		if ( ! bp_forum_notifier_notify_on_all_replies() ) {
+			if( bp_get_user_meta( $user_id, $setting, true ) != 'no' ) {
+				if( $this->settings[ 'mail-delay' ] ) {
+					add_user_meta( $user_id, 'bp_forum_notifier_emails', compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
 
-				if( ! wp_next_scheduled( 'bp_forum_notifier_scheduled_email', $user_id ) ) {
-					wp_schedule_single_event( microtime( true ) + ( ( ( int ) $this->settings[ 'mail-delay' ] ) * 60 ), 'bp_forum_notifier_scheduled_email', array( $user_id ) );
+					if( ! wp_next_scheduled( 'bp_forum_notifier_scheduled_email', $user_id ) ) {
+						wp_schedule_single_event( microtime( true ) + ( ( ( int ) $this->settings[ 'mail-delay' ] ) * 60 ), 'bp_forum_notifier_scheduled_email', array( $user_id ) );
+					}
+				} else {
+					BP_Forum_Notifier_Mailer::send_notification_email( $user_id, compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
 				}
-			} else {
-				BP_Forum_Notifier_Mailer::send_notification_email( $user_id, compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
+			}
+		} else {
+			if ( ! in_array( $user_id, groups_get_groupmeta( $group_id, 'bp-forum-notifier-mail-unsubscribe' ) ) ) {
+				error_log( $user_id );
+				if( $this->settings[ 'mail-delay' ] ) {
+					add_user_meta( $user_id, 'bp_forum_notifier_emails', compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
+
+					if( ! wp_next_scheduled( 'bp_forum_notifier_scheduled_email', $user_id ) ) {
+						wp_schedule_single_event( microtime( true ) + ( ( ( int ) $this->settings[ 'mail-delay' ] ) * 60 ), 'bp_forum_notifier_scheduled_email', array( $user_id ) );
+					}
+				} else {
+					BP_Forum_Notifier_Mailer::send_notification_email( $user_id, compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
+				}
 			}
 		}
 	}

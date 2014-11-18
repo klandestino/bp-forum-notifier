@@ -21,4 +21,9 @@ jQuery(document).ready( function($) {
 			}
 		},"JSON");
 	});
+
+	// since this plugin handles the mailsubscriptions, lets remove the checkbox from the form.
+	$('#bbp_topic_subscription').remove();
+	$("label[for='bbp_topic_subscription']").remove();
+
 });

@@ -218,6 +218,7 @@ class BP_Forum_Notifier extends BP_Component {
 
 	/**
 	 * Adds a new reply notification to all topic subscribers
+	 * or all group members if the new 'notifierhose' functionality is enabled
 	 * and eventually the quoted users if there are any.
 	 * @uses bbp_new_reply action
 	 * @see bbp_insert_reply
@@ -244,16 +245,56 @@ class BP_Forum_Notifier extends BP_Component {
 			}
 		}
 
-		// Get topic subscribers
-		$user_ids = bbp_get_topic_subscribers( $topic_id, true );
+		// Get groups if there are any
+		$groups = get_post_meta( $forum_id, '_bbp_group_ids', array() );
 
-		if( is_array( $user_ids ) ) {
-			foreach( $user_ids as $user_id ) {
-				if( $user_id != $reply_author && ! in_array( $user_id, $quote_user_ids ) && $this->is_forum_member( $user_id, $forum_id ) ) {
-					bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_reply_' . $topic_id, $topic_id );
-					$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe' );
+		// Check if we're using the legacy notifier functions or the > 1.4 notifierhose
+		// and if we're in a group forum, otherwise use the old notification system
+		if ( empty( $groups ) ) {
+
+			// Get topic subscribers
+			$user_ids = bbp_get_topic_subscribers( $topic_id, true );
+
+			if( is_array( $user_ids ) ) {
+				foreach( $user_ids as $user_id ) {
+					if( $user_id != $reply_author && ! in_array( $user_id, $quote_user_ids ) && $this->is_forum_member( $user_id, $forum_id ) ) {
+						bp_core_add_notification( $reply_id, $user_id, $this->id, 'new_reply_' . $topic_id, $topic_id );
+						$this->add_notification_email( $user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe' );
+					}
 				}
 			}
+
+		} elseif ( bp_forum_notifier_notify_on_all_replies() ) {
+
+			// Used for checking duplicates
+			$sent = array();
+
+			foreach( $groups as $group_ids ) {
+				if( ! is_array( $group_ids ) ) {
+					$group_ids = array( $group_ids );
+				}
+
+				foreach( $group_ids as $group_id ) {
+					$users = groups_get_group_members( $group_id );
+					// For some reason, admins and moderators are not included in the members array :(
+					$users = array_merge( $users[ 'members' ], groups_get_group_admins( $group_id ), groups_get_group_mods( $group_id ) ) ;
+
+					foreach( $users as $member ) {
+						if( $member->user_id != $reply_author && ! in_array( $member->user_id, $sent ) && ! in_array( $member->user_id, $quote_user_ids ) ) {
+							// Add for duplicate check
+							$sent[] = $member->user_id;
+							// Send
+							bp_core_add_notification( $reply_id, $member->user_id, $this->id, 'new_reply_' . $reply_id, $topic_id );
+							$this->add_notification_email( $member->user_id, $reply_id, $topic_id, $forum_id, $reply_author, 'new_reply_' . $topic_id, 'notification_forum_topic_subscribe', $group_id );
+
+						}
+					}
+
+					unset( $sent );
+					unset( $users );
+				}
+			}
+
 		}
 	}
 

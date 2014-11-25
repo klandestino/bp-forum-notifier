@@ -404,7 +404,6 @@ class BP_Forum_Notifier extends BP_Component {
 			}
 		} else {
 			if ( ! in_array( $user_id, groups_get_groupmeta( $group_id, 'bp-forum-notifier-mail-unsubscribe' ) ) ) {
-				error_log( $user_id );
 				if( $this->settings[ 'mail-delay' ] ) {
 					add_user_meta( $user_id, 'bp_forum_notifier_emails', compact( 'reply_id', 'topic_id', 'forum_id', 'author_id', 'action', 'setting' ) );
 

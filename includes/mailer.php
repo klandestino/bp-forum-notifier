@@ -12,7 +12,7 @@ class BP_Forum_Notifier_Mailer {
 		//add_filter( 'wp_mail', array( 'BP_Forum_Notifier_Mailer', 'log' ), 10, 5 );
 
 		// Add scheduled action for delayed e-mails
-		add_action( 'bp_forum_notifier_scheduled_email', array( 'BP_Forum_Notifier_Mailer', 'send_notification_email' ), 1, 1 );
+		add_action( 'bp_forum_notifier_scheduled_email', array( get_called_class(), 'send_notification_email' ), 1, 1 );
 	}
 
 	/**
@@ -115,9 +115,9 @@ class BP_Forum_Notifier_Mailer {
 
 			$message = sprintf( $settings[ 'mail-message-wrap' ], implode( "\n\n--------------------\n\n", $messages ) );
 
-			if( wp_mail( $user->user_email, $subject, $message ) ) {
-				delete_user_meta( $user_id, 'bp_forum_notifier_emails' );
-			}
+		}
+		if( wp_mail( $user->user_email, $subject, $message ) ) {
+			delete_user_meta( $user_id, 'bp_forum_notifier_emails' );
 		}
 	}
 

@@ -35,6 +35,13 @@ Sends on-site notifications on forum events that bbpress doesn't handle.
 
 == Changelog ==
 
+= v1.4 =
+
+* Add new functionality for getting notifications from all activity in group forums,
+  as well as the ability to toggle the notifications on a per-forum-basis.
+  This functionality is optional and can be toggled via the settings screen
+  in wp-admin.
+
 = v1.3.1 =
 
 * Fixed issue with notifications not getting deleted when visiting a

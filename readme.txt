@@ -3,8 +3,8 @@
 Contributors: spurge, lakrisgubben, alfreddatakillen
 Tags: buddypress, groups, forum, bbpress, notifications
 Requires at least: WordPress 3.4.2, BuddyPress 1.6.1, BBPress 2.2
-Tested up to: WordPress 3.5, BuddyPress 1.6.2, BBPress 2.2.3
-Stable tag: 1.3.1
+Tested up to: WordPress 4.0, BuddyPress 2.1.1, BBPress 2.5.4
+Stable tag: 1.4
 
 Sends on-site notifications on forum events that bbpress doesn't handle.
 
@@ -34,6 +34,13 @@ Sends on-site notifications on forum events that bbpress doesn't handle.
   delay feature to work properly.
 
 == Changelog ==
+
+= v1.4 =
+
+* Add new functionality for getting notifications from all activity in group forums,
+  as well as the ability to toggle the notifications on a per-forum-basis.
+  This functionality is optional and can be toggled via the settings screen
+  in wp-admin.
 
 = v1.3.1 =
 

@@ -8,7 +8,7 @@ function bp_forum_notifier_the_mail_subscription_button( $group_id = '' ) {
  * Returns the button for toggling per-group-forum subscriptions
  */
 
-function bp_forum_notifier_get_mail_subscription_button( $group_id = '' ) {
+function bp_forum_notifier_get_mail_subscription_button( $group_id = '', $js = false ) {
 	if ( function_exists( 'is_buddypress' ) && is_buddypress() ) {
 		$nonce = wp_create_nonce( 'bp-forum-notifier-toggle-subscription' );
 		if ( ! $group_id ) {
@@ -24,7 +24,12 @@ function bp_forum_notifier_get_mail_subscription_button( $group_id = '' ) {
 			}
 		}
 
-		return sprintf( '<span id="bp-forum-notifier-wrapper"><a href="#" class="subscription-toggle" id="bp-forum-notifier-toggle-subscription" data-nonce="%s" data-group_id="%d" data-action="%s">%s</a></span>', $nonce, $group_id, $action, $string );
+		if ( ! $js ) {
+			return sprintf( '<span id="bp-forum-notifier-wrapper"><a href="#" class="subscription-toggle" id="bp-forum-notifier-toggle-subscription" data-nonce="%s" data-group_id="%d" data-action="%s">%s</a></span>', $nonce, $group_id, $action, $string );
+		} else {
+			return sprintf( '<a href="#" class="subscription-toggle" id="bp-forum-notifier-toggle-subscription" data-nonce="%s" data-group_id="%d" data-action="%s">%s</a>', $nonce, $group_id, $action, $string );
+		}
+
 	}
 }
 add_action( 'bbp_template_before_single_forum', 'bp_forum_notifier_the_mail_subscription_button' );
@@ -46,7 +51,7 @@ function bp_forum_notifier_toggle_subscription() {
 			unset( $users[$key] );
 		}
 		groups_update_groupmeta( $group_id, 'bp-forum-notifier-mail-unsubscribe', (array) $users );
-		echo bp_forum_notifier_get_mail_subscription_button( $group_id );
+		echo bp_forum_notifier_get_mail_subscription_button( $group_id, true );
 		die();
 	} else {
 		echo '-1';

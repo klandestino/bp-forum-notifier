@@ -4,7 +4,7 @@
 Plugin Name: BuddyPress Forum Notifier
 Plugin URI: https://github.com/klandestino/
 Description: Sends on-site notifications on forum subscriptions
-Version: 1.4
+Version: 1.4.1
 Requires at least: 3.4.2
 Tested up to: 4.0
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html

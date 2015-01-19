@@ -5,7 +5,7 @@ BuddyPress Forum Notifier
 * Tags: buddypress, groups, forum, bbpress, notifications
 * Requires at least: WordPress 3.4.2, BuddyPress 1.6.1, BBPress 2.2
 * Tested up to: WordPress 4.0, BuddyPress 2.1.1, BBPress 2.5.4
-* Stable tag: 1.4
+* Stable tag: 1.4.1
 
 Sends on-site notifications on forum events that bbpress doesn't handle.
 
@@ -38,6 +38,10 @@ Installation
 
 Changelog
 ---------
+
+### v1.4.1
+
+* Make sure the button returned by ajax has the correct html.
 
 ### v1.4
 

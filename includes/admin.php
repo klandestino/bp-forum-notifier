@@ -20,7 +20,7 @@ class BP_Forum_Notifier_Admin {
 	static public function get_settings() {
 		$settings = get_option( 'bp_forum_notifier_settings', get_site_option( 'bp_forum_notifier_settings', array() ) );
 		$defaults = array(
-			'notifications-for-all-replies' => 'no',
+			'notifications-for-all-replies' => '',
 			'mail-delay' => '15',
 			'multiple-mail-messages-subject' => __( '[%1$s] %2$d new forum activities', 'bp-forum-notifier' ),
 			'reply-notification-single' => __( '%2$s wrote a new reply in %3$s', 'bp-forum-notifier' ),
@@ -101,6 +101,8 @@ Login and visit the topic to unsubscribe from these emails.', 'bp-forum-notifier
 			foreach( $settings as $key => $val ) {
 				if( array_key_exists( $key, $_POST ) ) {
 					$settings[ $key ] = $_POST[ $key ];
+				} else {
+					$settings[ $key ] = '';
 				}
 			}
 

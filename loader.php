@@ -4,9 +4,9 @@
 Plugin Name: BuddyPress Forum Notifier
 Plugin URI: https://github.com/klandestino/
 Description: Sends on-site notifications on forum subscriptions
-Version: 1.4.1
+Version: 1.4.2
 Requires at least: 3.4.2
-Tested up to: 4.0
+Tested up to: 4.1
 License: GNU General Public License 2.0 (GPL) http://www.gnu.org/licenses/gpl.html
 Author: spurge
 Author URI: https://github.com/spurge
@@ -78,7 +78,7 @@ add_action( 'wp_enqueue_scripts', 'bp_forum_notifier_enqueue_scripts' );
 function bp_forum_notifier_notify_on_all_replies() {
 	$settings = get_option( 'bp_forum_notifier_settings', get_site_option( 'bp_forum_notifier_settings', array() ) );
 
-	if ( $settings['notifications-for-all-replies'] == 'yes' ) {
+	if ( $settings['notifications-for-all-replies'] == 'on' ) {
 		return true;
 	} else {
 		return false;

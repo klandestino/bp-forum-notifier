@@ -41,7 +41,7 @@ $fields = array(
 							<?php elseif( $field[ 0 ] == 'textarea' ) : ?>
 								<textarea id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" class="large-text"><?php echo $settings[ $field_name ]; ?></textarea>
 							<?php elseif( $field[ 0 ] == 'checkbox' ) : ?>
-								<input id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" type="checkbox" value="yes" <?php checked( $settings[ $field_name ], 'yes', true ) ?> />
+								<input id="<?php echo $field_name; ?>" name="<?php echo $field_name; ?>" type="checkbox" <?php checked( $settings[ $field_name ], 'on', true ) ?> />
 							<?php endif; ?>
 
 							<?php if( array_key_exists( 2, $field ) ) : ?>

@@ -38,6 +38,7 @@ Sends on-site notifications on forum events that bbpress doesn't handle.
 = v1.4.2 =
 
 * Fix issue where user could not opt-out of the new functionality introduced in 1.4
+* Fix issue where apostrophes wouldn't work in mail subject
 
 = v1.4.1 =
 

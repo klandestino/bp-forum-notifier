@@ -116,7 +116,7 @@ class BP_Forum_Notifier_Mailer {
 			$message = sprintf( $settings[ 'mail-message-wrap' ], implode( "\n\n--------------------\n\n", $messages ) );
 
 		}
-		if( wp_mail( $user->user_email, $subject, $message ) ) {
+		if( wp_mail( $user->user_email, html_entity_decode( $subject, ENT_QUOTES ), $message ) ) {
 			delete_user_meta( $user_id, 'bp_forum_notifier_emails' );
 		}
 	}

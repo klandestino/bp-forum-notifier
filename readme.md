@@ -39,7 +39,7 @@ Installation
 Changelog
 ---------
 
-### v1.4.1
+### v1.4.2
 
 * Fix issue where user could not opt-out of the new functionality introduced in 1.4
 

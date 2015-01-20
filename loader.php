@@ -78,7 +78,7 @@ add_action( 'wp_enqueue_scripts', 'bp_forum_notifier_enqueue_scripts' );
 function bp_forum_notifier_notify_on_all_replies() {
 	$settings = get_option( 'bp_forum_notifier_settings', get_site_option( 'bp_forum_notifier_settings', array() ) );
 
-	if ( $settings['notifications-for-all-replies'] == 'on' ) {
+	if ( $settings['notifications-for-all-replies'] == 'on' || $settings['notifications-for-all-replies'] == 'yes' ) {
 		return true;
 	} else {
 		return false;
